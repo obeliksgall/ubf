@@ -1,0 +1,15 @@
+data/
+
+logs/
+
+lock/
+
+state/
+
+config/rclone.conf
+
+.env
+
+jobs/test.yaml
+
+jobs/test2.yaml
