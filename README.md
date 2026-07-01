@@ -160,6 +160,14 @@ docker exec ubf rclone check ocrypt:/ubf/onedrive /restore-test/onedrive
 
 ---
 
+## 🔐 Restart
+
+docker compose restart ubf
+docker restart ubf
+
+
+---
+
 ## 📜 Licencja
 
 MIT
