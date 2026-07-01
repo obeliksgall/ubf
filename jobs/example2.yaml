@@ -1,0 +1,10 @@
+name: private_backup
+type: sync
+
+source:
+  - :local:/data/private
+  - :local:/data/finance
+
+dest: gdrivecrypt:/ubf-private
+
+retention_days: 30

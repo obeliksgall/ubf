@@ -1,0 +1,11 @@
+name: mixed
+type: copy
+
+source:
+  - :local:/data/photos
+  - gdrive:/incoming
+  - onedrive:/shared
+
+dest: gdrive:/ubf-mixed
+
+retention_days: 7

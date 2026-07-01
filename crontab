@@ -1,0 +1,5 @@
+# Uruchamianie run-all.sh w każdy poniedziałek o 6:00
+#*/5 * * * * /bin/bash /scripts/run-all.sh >> /logs/cron.log 2>&1
+
+# Uruchamianie run-all.sh w każdy poniedziałek o 6:00
+#0 6 * * 1 /bin/bash /scripts/run-all.sh >> /logs/cron.log 2>&1

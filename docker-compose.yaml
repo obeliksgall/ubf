@@ -1,0 +1,20 @@
+services:
+  ubf:
+    build: .
+    container_name: ubf
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+      - UBF_VERSION=${UBF_VERSION}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - DISCORD_WEBHOOK=${DISCORD_WEBHOOK}
+      - NOTIFY_LEVEL=${NOTIFY_LEVEL}
+    volumes:
+      - ./config:/config/rclone
+      - ./scripts:/scripts
+      - ./jobs:/jobs
+      - ./logs:/logs
+      - ./state:/state
+      - ./lock:/lock
+      - ${UBF_DATA_VOL1}:/data/vol1
+      - ${UBF_DATA_VOL2}:/data/vol2

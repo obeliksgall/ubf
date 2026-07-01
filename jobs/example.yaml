@@ -1,0 +1,15 @@
+name: example
+type: sync
+
+source:
+  - :local:/data/Send
+  - :local:/data/private
+  - :local:/data/photos
+  - :local:/data/projects
+
+dest: gdrive:/ubf-backup
+
+# retention_days:
+# 0  → retention wyłączony
+# 14 → pliki usunięte w SOURCE zostają na DEST przez 14 dni
+retention_days: 14
