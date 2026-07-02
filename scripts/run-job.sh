@@ -49,6 +49,31 @@ flock -n 200 || {
     exit 1
 }
 
+# 🌐 TEST DOSTĘPU DO INTERNETU
+INTERNET_LOG="/logs/internet.log"
+
+check_internet() {
+    # Test DNS
+    if ! getent hosts google.com >/dev/null 2>&1; then
+        echo "$(date) ❌ Brak internetu (DNS niedostępny)" >> "$INTERNET_LOG"
+        return 1
+    fi
+
+    # Test HTTP
+    if ! wget -q --spider --timeout=2 https://www.google.com; then
+        echo "$(date) ❌ Brak internetu (HTTP niedostępny)" >> "$INTERNET_LOG"
+        return 1
+    fi
+
+    return 0
+}
+
+if ! check_internet; then
+    echo "❌ Brak internetu — backup przerwany."
+    exit 1
+fi
+
+
 # 📄 ODCZYT YAML (yq)
 TYPE=$(yq '.type // .mode // "sync"' "$JOB_FILE")
 DEST=$(yq '.dest' "$JOB_FILE")
@@ -125,12 +150,13 @@ done
 
 # 📜 HISTORIA BACKUPÓW (jq)
 jq ". += [{
-    \"job\": \"$JOB_NAME\",
-    \"status\": \"OK\",
-    \"time\": \"$(date)\",
-    \"sources\": $(printf '%s\n' "${SOURCES[@]}" | jq -R . | jq -s .)
-}]" /state/history.json > /state/history.tmp \
-    && mv /state/history.tmp /state/history.json
+  \"job\": \"$JOB_NAME\",
+  \"status\": \"OK\",
+  \"time\": \"$(date)\",
+  \"sources\": $(printf '%s\n' "${SOURCES[@]}" | jq -R . | jq -s .)
+}]" /state/history.json > /state/history.tmp
+
+mv /state/history.tmp /state/history.json
 
 # 🔔 Powiadomienie końcowe
 MSG="✅ Backup $JOB_NAME zakończony sukcesem."
