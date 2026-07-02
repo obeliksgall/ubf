@@ -16,5 +16,6 @@ services:
       - ./logs:/logs
       - ./state:/state
       - ./lock:/lock
+      - ./crontab:/etc/crontabs/root
       - ${UBF_DATA_VOL1}:/data/vol1
       - ${UBF_DATA_VOL2}:/data/vol2
