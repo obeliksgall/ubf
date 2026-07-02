@@ -8,4 +8,7 @@ source:
 
 dest: gdrive:/ubf-mixed
 
+#transfers: 4 #default value
+#checkers: 2 #default value
+
 retention_days: 7
