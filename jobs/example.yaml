@@ -9,6 +9,9 @@ source:
 
 dest: gdrive:/ubf-backup
 
+transfers: 2
+checkers: 1
+
 # retention_days:
 # 0  → retention wyłączony
 # 14 → pliki usunięte w SOURCE zostają na DEST przez 14 dni
